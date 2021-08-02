@@ -1,0 +1,10 @@
+/data/*
+/data/sorted_train/*
+/data/test/*
+/data/train/*
+/fashion_mnist_model/*
+/fashion_mnist_model_2/*
+/lost_planes_model/*
+/test/*
+/model1.model/*
+/venv/*
