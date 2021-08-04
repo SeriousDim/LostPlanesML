@@ -20,7 +20,7 @@ def load_train():
     return train_images, train_labels
 
 def load_test():
-    path = "/data/train"
+    path = "data/train"
     amount = 4610 # rows in my_train.csv
     size = (20, 20, 3)
     test_images = np.array([np.zeros(size) for i in range(amount)])
@@ -36,7 +36,7 @@ def load_test():
     return test_images, test_labels
 
 def read_imgs_for_answer():
-    path = "/data/test"
+    path = "data/test"
     amount = 1000  # rows in test.csv
     size = (20, 20, 3)
     result = np.array([np.zeros(size) for i in range(amount)])
