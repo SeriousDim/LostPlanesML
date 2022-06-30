@@ -37,15 +37,23 @@ def load_test():
 
 def read_imgs_for_answer():
     path = "data/test"
-    amount = 1000  # rows in test.csv
+    path2 = "data/extended_test"
+    amount = 1000 + 100000  # rows in test.csv
     size = (20, 20, 3)
     result = np.array([np.zeros(size) for i in range(amount)])
     names = ['' for i in range(amount)]
+    c = 0
     with open('data/test.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        c = 0
         for row in spamreader:
             img = cv.imread(path + "/" + row[0] + ".png")
+            result[c] = img
+            names[c] = row[0]
+            c += 1
+    with open('data/test_extended.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in spamreader:
+            img = cv.imread(path2 + "/" + row[0] + ".png")
             result[c] = img
             names[c] = row[0]
             c += 1

@@ -27,7 +27,7 @@ model = tf.keras.models.load_model("lost_planes_model")
 probability_model = tf.keras.Sequential([model,
                                          tf.keras.layers.Softmax()])
 
-imgs = imgs.reshape((1000, 20, 20, 3))
+imgs = imgs.reshape((1000 + 100000, 20, 20, 3))
 
 print("[INFO] predicting...")
 predIdxs = model.predict(imgs)

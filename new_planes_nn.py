@@ -43,13 +43,13 @@ args = vars(ap.parse_args())
 # initialize the initial learning rate, number of epochs to train for,
 # and batch size
 INIT_LR = 1e-4
-EPOCHS = 15
+EPOCHS = 5
 BS = 32
 
 # grab the list of images in our dataset directory, then initialize
 # the list of data (i.e., images) and class labels
 print("[INFO] loading images...")
-imagePaths = list(paths.list_images(config.BASE_PATH))
+imagePaths = list(paths.list_images("data\\sorted_train"))
 data = []
 labels = []
 
@@ -78,8 +78,7 @@ labels = to_categorical(labels)
 
 # partition the data into training and testing splits using 75% of
 # the data for training and the remaining 25% for testing
-(trainX, testX, trainY, testY) = train_test_split(data, labels,
-	test_size=0.001, stratify=labels)
+(trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.001, stratify=labels)
 
 # construct the training image generator for data augmentation
 aug = ImageDataGenerator(
@@ -125,8 +124,8 @@ print("[INFO] training head...")
 H = model.fit(
 	aug.flow(trainX, trainY, batch_size=BS),
 	steps_per_epoch=len(trainX) // BS,
-	# validation_data=(testX, testY),
-	# validation_steps=len(testX) // BS,
+	#validation_data=(testX, testY),
+	#validation_steps=len(testX) // BS,
 	epochs=EPOCHS)
 
 # serialize the model to disk

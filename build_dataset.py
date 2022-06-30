@@ -10,13 +10,13 @@ import cv2
 import os
 
 # loop over the output positive and negative directories
-for dirPath in (config.POSITVE_PATH, config.NEGATIVE_PATH):
+for dirPath in (config.MY_POSITVE_PATH, config.MY_NEGATIVE_PATH):
 	# if the output directory does not exist yet, create it
 	if not os.path.exists(dirPath):
 		os.makedirs(dirPath)
 
 # grab all image paths in the input images directory
-imagePaths = list(paths.list_images(config.ORIG_IMAGES))
+imagePaths = list(paths.list_images(config.MY_ORIG_IMAGES))
 
 # initialize the total number of positive and negative images we have
 # saved to disk so far
@@ -33,37 +33,6 @@ for (i, imagePath) in enumerate(imagePaths):
 	# the path to the XML annotation file
 	filename = imagePath.split(os.path.sep)[-1]
 	filename = filename[:filename.rfind(".")]
-	annotPath = os.path.sep.join([config.ORIG_ANNOTS,
-		"{}.xml".format(filename)])
-
-	# load the annotation file, build the soup, and initialize our
-	# list of ground-truth bounding boxes
-	contents = open(annotPath).read()
-	soup = BeautifulSoup(contents, "html.parser")
-	gtBoxes = []
-
-	# extract the image dimensions
-	w = int(soup.find("width").string)
-	h = int(soup.find("height").string)
-
-	# loop over all 'object' elements
-	for o in soup.find_all("object"):
-		# extract the label and bounding box coordinates
-		label = o.find("name").string
-		xMin = int(o.find("xmin").string)
-		yMin = int(o.find("ymin").string)
-		xMax = int(o.find("xmax").string)
-		yMax = int(o.find("ymax").string)
-
-		# truncate any bounding box coordinates that may fall
-		# outside the boundaries of the image
-		xMin = max(0, xMin)
-		yMin = max(0, yMin)
-		xMax = min(w, xMax)
-		yMax = min(h, yMax)
-
-		# update our list of ground-truth bounding boxes
-		gtBoxes.append((xMin, yMin, xMax, yMax))
 
 	# load the input image from disk
 	image = cv2.imread(imagePath)

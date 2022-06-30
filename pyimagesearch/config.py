@@ -1,6 +1,10 @@
 # import the necessary packages
 import os
 
+MY_POSITVE_PATH  = "data\\ss\\1"
+MY_NEGATIVE_PATH = "data\\ss\\0"
+MY_ORIG_IMAGES = "data\\train"
+
 # define the base path to the *original* input dataset and then use
 # the base path to derive the image and annotations directories
 ORIG_BASE_PATH = "raccoons"
@@ -12,7 +16,7 @@ ORIG_ANNOTS = os.path.sep.join([ORIG_BASE_PATH, "annotations"])
 # our output class label directories
 
 # установил здесь свои пути
-BASE_PATH = "data/sorted_train"
+BASE_PATH = "data\\sorted_train"
 POSITVE_PATH = os.path.sep.join([BASE_PATH, "1"])
 NEGATIVE_PATH = os.path.sep.join([BASE_PATH, "0"])
 
